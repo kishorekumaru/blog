@@ -1,0 +1,103 @@
+  <div class="container">
+  <div class="panel panel-default">
+        <div class="panel-heading">HOTEL DETAILS</div>
+         <br>
+         
+         
+         
+        <div class="container">
+            <div class="col-lg-4 text-left">
+            	Search User: <input type="text" ng-model="userName">
+                             </div>
+            <div class="col-lg-4 text-right">
+                <div ng-controller="popupController">
+                <button type="button" class="btn btn-primary btn-sm" ng-click="openWindow()">
+                  <span class="glyphicon glyphicon-plus-sign"></span> ADD NEW
+                </button>
+   					 <script type="text/ng-template" id="myModalContent.html">
+            	<div class="modal-header">
+                	<button class="close" ng-click="cancel()">&times;</button>
+                    <h4> {{ headerName }} </h4>
+                </div>
+                
+                
+                <div class="modal-body">
+				
+				
+				<div class="alert alert-danger" role="alert" ng-model="data.errorMsg" ng-show="data.isMismatch">Password is not matching</div>
+                	<form name="userAddForm">
+                    	<table class="table table-bordered">
+                        <tr>
+                        	<td>User name</td>
+                    		<td><input type="input" name="username" ng-model="user.user_name"></td>
+                         </tr>
+                         <tr>
+                        	<td>Password</td>
+                            <td><input type="password" ng-keyup="evaluate()" name="password" ng-model="user.user_password"></td>
+                          <tr>
+                          <tr>
+                          	<td>Confirm Password</td>
+                            <td><input type="password" ng-keyup="evaluate()" name="confirmPassword" ng-model="data.confirmPassword"></td>
+                          </tr>
+						  <tr>
+                          	<td>User Type</td>
+                            <td><select ng-model="user.user_type"> 
+								<option value="1" ng-selected="selected">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option></select></td>
+                          </tr>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                	<button class="btn btn-default" ng-click="cancel()">Close</button>
+                    <button class="btn btn-primary" ng-click="saveChanges()">Save Changes</button>
+                </div>
+            </script>
+    </div>
+               
+            </div>
+        </div>
+        
+        
+            <div class="container center-block"> 
+                <div class="col-lg-8">
+                    <table class="table table-bordered table-hover">
+                        <tbody> <tr> 
+                            <td> #</td> 
+                            <td> Name</td>
+                            <td> Password</td> 
+                            <td> User type</td> 
+                            <td> Insert Date</td> 
+                            <td> Action </td>
+                        </tr></tbody>
+                        <tr ng-repeat="user in userDetailsPage | filter:userName">
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.user_name }}</td>
+                            <td>{{ user.user_password }}</td>
+                            <td>{{ user.user_type }}</td>
+                            <td>{{ user.insert_date }} </td>
+                            <td> <button type="button" class="btn btn-primary btn-sm" ng-click="editUserItem( user.id )">
+                  					<span class="glyphicon glyphicon-pencil"></span>
+                				</button>
+                				<button type="button" class="btn btn-danger btn-sm" ng-click="deleteUserItem(user.id)">
+                 					 <span class="glyphicon glyphicon-remove"></span>
+              					  </button></td>
+                       </tr>
+                        
+                    </table>
+                   <div class="text-right"> <pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged(currentPage)"></pagination></div>
+                </div>
+            </div>       
+    </div>
+   </div>
+   
+   
+    
+    
+      
+    
+     
+  
+
+    
